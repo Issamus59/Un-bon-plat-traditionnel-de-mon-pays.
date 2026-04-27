@@ -1,1 +1,1 @@
-# Un-bon-plat-traditionnel-de-mon-pays.
+# Un-bon-plat-traditionnel-de-mon-pays
