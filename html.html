@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Évaluation – Expression écrite</title>
+  
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --warm: #f5e9d3;
+      --bordeaux: #7a2832;
+      --gold: #c49a3c;
+      --dark: #2c1a0e;
+      --mid: #6b4c2a;
+      --light-border: #ddc99a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--cream);
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      padding: 40px 20px;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      background: white;
+      border: 2px solid var(--light-border);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--bordeaux);
+      color: white;
+      padding: 32px 40px 24px;
+      position: relative;
+    }
+    .header::after {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .header-level {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .header-date {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+    .header h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .header-subtitle {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* STUDENT INFO */
+    .student-info {
+      background: var(--warm);
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--light-border);
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .info-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 180px;
+    }
+    .info-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+    .info-line {
+      flex: 1;
+      border-bottom: 1.5px solid var(--mid);
+      height: 22px;
+    }
+
+    /* BODY */
+    .body {
+      padding: 36px 40px;
+    }
+
+    /* CONSIGNE */
+    .consigne-box {
+      border-left: 4px solid var(--bordeaux);
+      background: #fdf0f1;
+      padding: 18px 22px;
+      margin-bottom: 28px;
+      border-radius: 0 4px 4px 0;
+    }
+    .consigne-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--bordeaux);
+      margin-bottom: 8px;
+    }
+    .consigne-text {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--dark);
+    }
+    .consigne-text strong {
+      color: var(--bordeaux);
+    }
+
+    /* AVERTISSEMENT */
+    .avertissement {
+      background: #fffbea;
+      border: 1.5px solid var(--gold);
+      border-radius: 4px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .avert-icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .avert-text {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #5a4200;
+    }
+    .avert-text strong {
+      color: var(--bordeaux);
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px;
+      color: var(--bordeaux);
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--light-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title span.num {
+      background: var(--bordeaux);
+      color: white;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* MODELE */
+    .modele {
+      background: var(--cream);
+      border: 1px solid var(--light-border);
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .modele-label {
+      position: absolute;
+      top: -11px;
+      left: 20px;
+      background: var(--gold);
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+    .modele h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      color: var(--bordeaux);
+      margin-bottom: 14px;
+      margin-top: 6px;
+    }
+    .modele p {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    /* TABLEAU */
+    .tableau-wrap {
+      margin-top: 18px;
+    }
+    .tableau-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr {
+      background: var(--bordeaux);
+      color: white;
+    }
+    thead th {
+      padding: 9px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    tbody tr:nth-child(odd) { background: white; }
+    tbody tr:nth-child(even) { background: var(--warm); }
+    tbody td {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--light-border);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+    }
+    tbody td:first-child {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--bordeaux);
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* IMAGE UPLOAD */
+    .image-section {
+      margin-bottom: 28px;
+    }
+    .image-upload-area {
+      border: 2px dashed var(--light-border);
+      border-radius: 6px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: #fafafa;
+      position: relative;
+    }
+    .image-upload-area:hover {
+      border-color: var(--gold);
+      background: var(--warm);
+    }
+    .upload-icon { font-size: 32px; margin-bottom: 10px; }
+    .upload-text {
+      font-size: 14px;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+    .upload-hint {
+      font-size: 12px;
+      color: #aaa;
+    }
+    #fileInput { display: none; }
+    #imagePreview {
+      display: none;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+    #imagePreview img {
+      max-height: 180px;
+      max-width: 220px;
+      border-radius: 4px;
+      border: 1px solid var(--light-border);
+      object-fit: cover;
+    }
+    .remove-img {
+      position: relative;
+      display: inline-block;
+    }
+    .remove-btn {
+      position: absolute;
+      top: -8px; right: -8px;
+      background: var(--bordeaux);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px; height: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+
+    /* RÉDACTION ZONE */
+    .redaction-section { margin-bottom: 28px; }
+    .textarea-wrap { position: relative; }
+    textarea {
+      width: 100%;
+      min-height: 300px;
+      border: 1.5px solid var(--light-border);
+      border-radius: 6px;
+      padding: 18px 20px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--dark);
+      background: white;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    textarea:focus { border-color: var(--bordeaux); }
+    textarea::placeholder { color: #bbb; font-style: italic; }
+    .word-count {
+      text-align: right;
+      font-size: 12px;
+      color: var(--mid);
+      margin-top: 6px;
+    }
+
+    /* GRILLE D'ÉVALUATION */
+    .grille {
+      margin-bottom: 28px;
+    }
+    .grille table thead tr {
+      background: var(--mid);
+    }
+    .grille-score {
+      width: 60px;
+      text-align: center;
+    }
+    .score-input {
+      width: 50px;
+      border: 1px solid var(--light-border);
+      border-radius: 3px;
+      padding: 4px 6px;
+      text-align: center;
+      font-size: 13px;
+      background: white;
+    }
+    .total-row td {
+      font-weight: 700;
+      background: var(--warm) !important;
+      color: var(--bordeaux);
+    }
+
+    /* PRINT BUTTON */
+    .print-bar {
+      background: var(--warm);
+      border-top: 1px solid var(--light-border);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .btn {
+      padding: 11px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary {
+      background: var(--bordeaux);
+      color: white;
+    }
+    .btn-secondary {
+      background: white;
+      color: var(--mid);
+      border: 1.5px solid var(--light-border);
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      body { padding: 0; background: white; }
+      .page { box-shadow: none; border: none; }
+      .print-bar { display: none; }
+      .image-upload-area { display: none; }
+      textarea {
+        border: 1px solid #ccc;
+        min-height: 280px;
+      }
+      .avert-icon { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-level">NCLC 3 / 4 &nbsp;•&nbsp; Niveau A1–A2</div>
+      <div class="header-date">Date : ___________________________</div>
+    </div>
+    <h1>Évaluation #11 — Expression écrite</h1>
+    <div class="header-subtitle">Un plat traditionnel de mon pays d'origine</div>
+  </div>
+
+  <!-- STUDENT INFO -->
+  <div class="student-info">
+    <div class="info-field">
+      <span class="info-label">Nom</span>
+      <div class="info-line"></div>
+    </div>
+    <div class="info-field">
+      <span class="info-label">Prénom</span>
+      <div class="info-line"></div>
+    </div>
+    <div class="info-field">
+      <span class="info-label">Pays d'origine</span>
+      <div class="info-line"></div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- CONSIGNE -->
+    <div class="consigne-box">
+      <div class="consigne-title">📋 Consigne</div>
+      <div class="consigne-text">
+        Lisez attentivement le texte modèle ci-dessous. Il présente un plat traditionnel iranien.
+        <br><br>
+        <strong>Écrivez un texte semblable</strong> pour présenter un plat traditionnel <strong>de votre pays d'origine</strong>.
+        Utilisez des phrases simples. Votre texte doit contenir :
+        <br><br>
+        ✔ des verbes au <strong>présent</strong> &nbsp;|&nbsp;
+        ✔ des verbes au <strong>passé composé</strong> &nbsp;|&nbsp;
+        ✔ des verbes au <strong>futur simple</strong>
+        <br><br>
+        Vous pouvez ajouter <strong>une ou deux photos</strong> de votre plat si vous le souhaitez.
+      </div>
+    </div>
+
+    <!-- AVERTISSEMENT -->
+    <div class="avertissement">
+      <div class="avert-icon">⚠️</div>
+      <div class="avert-text">
+        <strong>Avertissement important :</strong>
+        L'utilisation d'un <strong>traducteur automatique est interdite</strong>.
+        Vous pouvez consulter un <strong>dictionnaire</strong> et un <strong>conjugueur</strong>,
+        mais <em>uniquement pour les verbes du 3<sup>e</sup> groupe</em>.
+      </div>
+    </div>
+
+    <!-- TEXTE MODÈLE -->
+    <div class="section-title">
+      <span class="num">1</span> Texte modèle
+    </div>
+    <div class="modele">
+      <div class="modele-label">Exemple à suivre</div>
+      <h3>Le Ghormeh Sabzi</h3>
+      <p>Le Ghormeh Sabzi est un plat traditionnel iranien. Ce plat est très populaire en Iran. Les Iraniens adorent ça depuis des siècles.</p>
+      <p>Pour préparer ce plat, on choisit des herbes fraîches. On coupe le persil, le poireau et la coriandre. Ensuite, on fait revenir les herbes dans une poêle. On ajoute de la viande d'agneau et des haricots rouges. Le plat cuit lentement pendant plusieurs heures.</p>
+      <p>Le Ghormeh Sabzi sent très bon. Il a un goût fort et agréable. On le mange avec du riz blanc.</p>
+      <p>Ma mère a préparé ce plat souvent quand j'étais enfant. J'ai mangé ce plat pour la première fois à Téhéran. J'ai adoré ce repas tout de suite.</p>
+      <p>La semaine prochaine, je préparerai ce plat chez moi. J'inviterai mes amis à dîner. Nous mangerons ensemble et nous passerons une belle soirée.</p>
+
+      <div class="tableau-wrap">
+        <div class="tableau-title">Inventaire grammatical</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Temps</th>
+              <th>Exemples tirés du texte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Présent – 1er groupe</td><td>couper, ajouter, manger, préparer, inviter, adorer</td></tr>
+            <tr><td>Présent – 2e groupe</td><td>choisir</td></tr>
+            <tr><td>Présent – 3e groupe</td><td>être, avoir, sentir, faire, cuire</td></tr>
+            <tr><td>Passé composé</td><td>a préparé, ai mangé, ai adoré</td></tr>
+            <tr><td>Futur simple</td><td>préparerai, inviterai, mangerons, passerons</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- IMAGE UPLOAD -->
+    <div class="image-section">
+      <div class="section-title">
+        <span class="num">2</span> Photo de votre plat <em style="font-size:13px; font-family:'Segoe UI', Arial, sans-serif; font-weight:300; color:#999;">(facultatif)</em>
+      </div>
+      <div class="image-upload-area" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-icon">🍽️</div>
+        <div class="upload-text">Cliquez ici pour ajouter une ou deux photos de votre plat</div>
+        <div class="upload-hint">Formats acceptés : JPG, PNG, WEBP</div>
+        <input type="file" id="fileInput" accept="image/*" multiple onchange="previewImages(event)"/>
+      </div>
+      <div id="imagePreview"></div>
+    </div>
+
+    <!-- RÉDACTION -->
+    <div class="redaction-section">
+      <div class="section-title">
+        <span class="num">3</span> Ma production écrite
+      </div>
+      <div class="textarea-wrap">
+        <textarea id="redaction" placeholder="Écrivez votre texte ici. Donnez d'abord un titre à votre plat, puis rédigez votre texte en suivant le modèle…" oninput="countWords()"></textarea>
+      </div>
+      <div class="word-count" id="wordCount">Nombre de mots : 0</div>
+    </div>
+
+    <!-- GRILLE D'ÉVALUATION -->
+    <div class="grille">
+      <div class="section-title">
+        <span class="num">4</span> Grille d'évaluation <em style="font-size:13px; font-family:'Segoe UI', Arial, sans-serif; font-weight:300; color:#999;">(réservé à l'enseignant)</em>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th style="width:180px;">Descripteur</th>
+            <th class="grille-score">/ Points</th>
+            <th class="grille-score">Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Contenu et pertinence</td>
+            <td>Le texte présente bien un plat traditionnel</td>
+            <td class="grille-score">/4</td>
+            <td class="grille-score"><input class="score-input" type="number" min="0" max="4"/></td>
+          </tr>
+          <tr>
+            <td>Présent de l'indicatif</td>
+            <td>Verbes des 3 groupes bien conjugués</td>
+            <td class="grille-score">/4</td>
+            <td class="grille-score"><input class="score-input" type="number" min="0" max="4"/></td>
+          </tr>
+          <tr>
+            <td>Passé composé</td>
+            <td>Formation et accord corrects</td>
+            <td class="grille-score">/4</td>
+            <td class="grille-score"><input class="score-input" type="number" min="0" max="4"/></td>
+          </tr>
+          <tr>
+            <td>Futur simple</td>
+            <td>Verbes bien formés et bien utilisés</td>
+            <td class="grille-score">/4</td>
+            <td class="grille-score"><input class="score-input" type="number" min="0" max="4"/></td>
+          </tr>
+          <tr>
+            <td>Vocabulaire</td>
+            <td>Mots appropriés et variés</td>
+            <td class="grille-score">/2</td>
+            <td class="grille-score"><input class="score-input" type="number" min="0" max="2"/></td>
+          </tr>
+          <tr>
+            <td>Cohérence et structure</td>
+            <td>Texte lisible, organisé en paragraphes</td>
+            <td class="grille-score">/2</td>
+            <td class="grille-score"><input class="score-input" type="number" min="0" max="2"/></td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="2">TOTAL</td>
+            <td class="grille-score">/20</td>
+            <td class="grille-score" id="totalScore">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- COMMENTAIRES -->
+    <div style="margin-bottom: 10px;">
+      <div class="section-title">
+        <span class="num">5</span> Commentaires de l'enseignant
+      </div>
+      <textarea style="min-height:90px; font-size:14px;" placeholder="Commentaires, encouragements, points à améliorer…"></textarea>
+    </div>
+
+  </div><!-- end body -->
+
+  <!-- PRINT BAR -->
+  <div class="print-bar">
+    <button class="btn btn-secondary" onclick="clearAll()">🗑 Effacer</button>
+    <button class="btn btn-primary" onclick="window.print()">🖨 Imprimer / Enregistrer en PDF (Ctrl+P)</button>
+  </div>
+
+</div><!-- end page -->
+
+<script>
+  // Image preview
+  function previewImages(event) {
+    const files = Array.from(event.target.files).slice(0, 2);
+    const preview = document.getElementById('imagePreview');
+    preview.innerHTML = '';
+    preview.style.display = files.length ? 'flex' : 'none';
+    files.forEach((file, i) => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const wrap = document.createElement('div');
+        wrap.className = 'remove-img';
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        const btn = document.createElement('button');
+        btn.className = 'remove-btn';
+        btn.innerHTML = '✕';
+        btn.onclick = () => { wrap.remove(); if (!preview.children.length) preview.style.display = 'none'; };
+        wrap.appendChild(img);
+        wrap.appendChild(btn);
+        preview.appendChild(wrap);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Word count
+  function countWords() {
+    const text = document.getElementById('redaction').value.trim();
+    const count = text ? text.split(/\s+/).length : 0;
+    document.getElementById('wordCount').textContent = 'Nombre de mots : ' + count;
+  }
+
+  // Auto-total score
+  document.querySelectorAll('.score-input').forEach(input => {
+    input.addEventListener('input', () => {
+      let total = 0;
+      document.querySelectorAll('.score-input').forEach(i => {
+        total += parseInt(i.value) || 0;
+      });
+      document.getElementById('totalScore').textContent = total + ' / 20';
+    });
+  });
+
+  // Clear all
+  function clearAll() {
+    if (confirm('Effacer toutes les données saisies ?')) {
+      document.getElementById('redaction').value = '';
+      document.querySelectorAll('textarea').forEach(t => t.value = '');
+      document.querySelectorAll('.score-input').forEach(i => i.value = '');
+      document.getElementById('totalScore').textContent = '—';
+      document.getElementById('imagePreview').innerHTML = '';
+      document.getElementById('imagePreview').style.display = 'none';
+      countWords();
+    }
+  }
+</script>
+
+</body>
+</html>
